@@ -18,6 +18,8 @@ Runs on the device, close to the microphone. Streams incoming speech against a l
 
 The resolver is intentionally light. It does not do the heavy lifting itself. Its job is to identify what the user wants fast enough that the heavy lifting can start in parallel with the rest of the sentence, and to package what it knows so far into an intent frame it can send onward.
 
+Underneath that matching is possibility pruning. A word opens the set of things it could imply, and the next word cuts that set down: "send" opens the short list of sendable things, "send a text" drills straight to one function. This is cheap elimination against a known list, not deep language understanding, and it is why the resolver's tiny parameter budget is enough. As matches establish, the resolver spawns multiple parallel matchers so stacked or compound statements resolve side by side while the user keeps talking, instead of one at a time. This entire path runs fully offline on the device: no external source and no network connection are needed until a resolved function actually requires server-side work.
+
 ## Activation engine
 
 Runs on a server: self-hosted, or hosted on EasWrk. Receives intent frames from the resolver as they arrive, not just at the end. If the request needs a tool that does not exist yet ("how big is my yard"), the engine assembles it on demand: fetches the satellite image, works out scale from known reference points, outlines the lot boundary, computes area, and returns the number. If the request is simple (send this text), the engine confirms the resolver's candidate action and returns quickly.

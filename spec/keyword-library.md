@@ -31,6 +31,26 @@ Entity sources are read locally. The resolver does not need network access to id
 
 The resolver does not wait for a complete sentence to start narrowing possibilities. As soon as an action keyword is heard, it opens a candidate action and starts watching for the entities that action needs. As soon as an entity source finds a match, even a partial one (first name only, ambiguous until enough context arrives), the resolver includes it in the next intent frame with an honest confidence score. Confidence rises as more of the sentence disambiguates the request. This is what lets the activation engine start warming up work before the sentence is finished: it is reacting to a stream of increasingly confident partial frames, not a single command issued at the end.
 
+## Phrase command matching
+
+The per-word pipeline underneath everything described above:
+
+1. A word arrives from the speech stream.
+2. It is matched against the on-device phrase command library, target latency in the hundredths of a second.
+3. The match either opens a new possibility set (the word introduces a category of things it could mean) or cuts down an already-open set (the word eliminates candidates that don't fit).
+4. The narrowed or opened set is emitted or folds into the current intent frame.
+5. If the word starts a new, separate statement, a new matcher spawns in parallel so the first statement keeps resolving untouched.
+
+**Walkthrough: "send a text to Sarah"**
+
+- "send" arrives. It opens the short list of sendable things: a text, an email, not much else.
+- "a" arrives. No new information, set unchanged.
+- "text" arrives. It cuts the list down to one: `compose_message`. The candidate action is now fixed.
+- "to" arrives. Signals an entity is coming, no cut yet.
+- "Sarah" arrives. Matched against the contact library, filling the `contact` slot of the same intent frame opened at "text."
+
+None of this required the resolver to understand the sentence. Each word only had to narrow a list it already had.
+
 ## Growing the library
 
 The keyword library is meant to be extended, not treated as fixed. Adding a new action word and mapping it to a new candidate action is the expected way to add a new capability to the resolver side. See `docs/roadmap.md` phase 5 for how the activation engine handles actions that do not have a pre-built handler yet.
