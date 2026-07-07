@@ -20,6 +20,8 @@ Liquid OS is three layers.
 
 **Shell.** The interface the user actually sees and talks to. On Android, with an unlocked bootloader, it replaces the stock launcher and interface outright. On iOS it installs as the first app on a clean device and becomes the front door: it drives the phone's existing subsystems (contacts, messages, camera, maps) directly instead of opening full apps for each one. Fewer processes running, less battery burned per task.
 
+The resolver and the engine run on different scales of model on purpose. The resolver carries a tiny gate model sized to the device at install, matching keywords and entities only, never generating language. The engine sits behind a model-agnostic routing layer that can call any large model: Claude, GPT, Grok, Gemini, self-hosted Llama, and the Chinese providers DeepSeek, Qwen, Kimi, and GLM, so no market is left out and a region blocked from one provider still gets routed to another.
+
 ## Platform story
 
 **Android.** On devices with an unlocked bootloader, Liquid OS takes over as the primary interface. No app grid underneath it to fall back to.
@@ -39,6 +41,7 @@ Early scaffold. This repository is documentation, specs, and project layout only
 | `docs/roadmap.md` | Build phases, no dates |
 | `spec/intent-frame.md` | JSON format the resolver streams to the engine |
 | `spec/keyword-library.md` | On-device keyword and entity matching design |
+| `spec/model-routing.md` | Provider routing config: model-agnostic engine, device resolver parameter budget, data boundary (draft) |
 | `resolver/` | On-device streaming resolver (prototype not yet started) |
 | `engine/` | Activation engine service (not yet started) |
 | `shell/android/` | Android launcher replacement (not yet started) |
