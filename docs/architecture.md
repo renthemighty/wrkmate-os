@@ -1,6 +1,6 @@
 # Architecture
 
-Liquid OS has three layers. Each one has a single job.
+WrkMate OS has three layers. Each one has a single job.
 
 ## Shell
 
@@ -9,6 +9,8 @@ The interface the user sees and talks to.
 On Android, on a device with an unlocked bootloader, the shell replaces the stock launcher and interface outright. There is no app grid underneath waiting to be revealed. The shell is the whole interface.
 
 On iOS, Apple does not permit a full system takeover, so the shell installs as the first app on a clean device and acts as the front door. It listens continuously while active and drives the phone's existing subsystems directly: Contacts, Messages, Camera, Maps. It does not open the Messages app and hand off to it. It calls into the same functionality Messages uses and shows the result inline. Fewer processes spawned per task, less battery spent per task.
+
+Past the first screen, the shell shows no app grid. What looks like a static interface is Liquid Technology underneath: the shell surfaces whatever tool the activation engine just assembled for the current request, and nothing else persists once the request is done.
 
 ## Resolver
 
@@ -19,6 +21,8 @@ The resolver is intentionally light. It does not do the heavy lifting itself. It
 ## Activation engine
 
 Runs on a server: self-hosted, or hosted on EasWrk. Receives intent frames from the resolver as they arrive, not just at the end. If the request needs a tool that does not exist yet ("how big is my yard"), the engine assembles it on demand: fetches the satellite image, works out scale from known reference points, outlines the lot boundary, computes area, and returns the number. If the request is simple (send this text), the engine confirms the resolver's candidate action and returns quickly.
+
+This assemble, use, discard cycle is Liquid Technology. The engine writes a single-purpose tool for the request just spoken, runs it, and removes it once the result is returned. No tool sits resident waiting for the next request that might never come.
 
 The engine is built to be self-hostable and is not tied to running on any single infrastructure provider. EasWrk hosting is an option, not a requirement.
 

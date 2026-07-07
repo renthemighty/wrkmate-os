@@ -1,6 +1,6 @@
-# Contributing to Liquid OS
+# Contributing to WrkMate OS
 
-Liquid OS is early. Most of the project is still spec and design, not code. That makes this a good time to shape it, and a good time to keep changes small.
+WrkMate OS is early. Most of the project is still spec and design, not code. That makes this a good time to shape it, and a good time to keep changes small.
 
 ## Before you write code
 

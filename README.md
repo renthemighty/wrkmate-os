@@ -1,18 +1,26 @@
-# Liquid OS
+# WrkMate OS
 
-An open source phone interface that finishes tasks while you are still speaking.
+An open source phone interface, built on Liquid Technology, that finishes tasks while you are still speaking.
 
 ## What it is
 
-Liquid OS replaces the wake-word, open-app, fill-in-fields, confirm flow that Siri and Google Assistant use. Instead of waiting for a full command and then acting, it streams speech into an on-device resolver that starts working the moment it recognizes a keyword. Say "send a text to Sarah, I'll be there in 10 minutes" and the resolver identifies the contact and starts drafting the message while you are still talking. By the time you stop speaking, the action is already done.
+WrkMate OS replaces the wake-word, open-app, fill-in-fields, confirm flow that Siri and Google Assistant use. Instead of waiting for a full command and then acting, it streams speech into an on-device resolver that starts working the moment it recognizes a keyword. Say "send a text to Sarah, I'll be there in 10 minutes" and the resolver identifies the contact and starts drafting the message while you are still talking. By the time you stop speaking, the action is already done.
 
 Heavier requests are handed to the activation engine, a server-side build system that assembles one-off tools on demand. Ask "how big is my yard" and the engine fetches a satellite image, works out scale, outlines the lot, and returns a square footage number. Nobody wrote a yard-measuring app ahead of time. The engine built the tool for that request.
 
-Think of it the way Windows sat on DOS. The existing operating system keeps running underneath and keeps doing the low-level work it is good at. Liquid OS runs on top of it, within each platform's constraints, and becomes the layer you actually live in. It does not pretend to replace what the platform will not let it replace.
+Think of it the way Windows sat on DOS. The existing operating system keeps running underneath and keeps doing the low-level work it is good at. WrkMate OS runs on top of it, within each platform's constraints, and becomes the layer you actually live in. It does not pretend to replace what the platform will not let it replace.
+
+## Liquid Technology
+
+Liquid Technology is the set of skills at the center of WrkMate OS: single-purpose tools written on the fly, in real time, to achieve the goal the user just spoke, and then removed when the task completes. Nothing stays resident. That keeps the device light: storage stays free, transfer speeds stay high, battery is not spent idling on background processes nobody asked to run.
+
+User content is untouched by this cycle. Photos, messages, and files are stored normally and sent as packages, the same as on any phone. Liquid Technology only governs the tools, not the data.
+
+WrkMate OS is voice-first with a deliberately simple interface. Users who want icons can keep icons. Past that first screen there are no apps as such, only Liquid Technology assembling and discarding tools per task.
 
 ## How it works
 
-Liquid OS is three layers.
+WrkMate OS is three layers.
 
 **Resolver.** Runs on the device. Streams the microphone input against a local keyword and entity library (contacts, calendar, recent apps) and starts matching intent before the sentence finishes. It does not wait for silence to begin working.
 
@@ -24,9 +32,9 @@ The resolver and the engine run on different scales of model on purpose. The res
 
 ## Platform story
 
-**Android.** On devices with an unlocked bootloader, Liquid OS takes over as the primary interface. No app grid underneath it to fall back to.
+**Android.** On devices with an unlocked bootloader, WrkMate OS takes over as the primary interface. No app grid underneath it to fall back to.
 
-**iOS.** Apple does not allow a full system replacement, so Liquid OS installs as the first app on the device and acts as the front door for everything voice can reach. It calls into Messages, Contacts, Camera, and Maps directly rather than spawning each app in turn.
+**iOS.** Apple does not allow a full system replacement, so WrkMate OS installs as the first app on the device and acts as the front door for everything voice can reach. It calls into Messages, Contacts, Camera, and Maps directly rather than spawning each app in turn.
 
 ## Project status
 

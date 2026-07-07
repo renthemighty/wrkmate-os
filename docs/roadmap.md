@@ -16,7 +16,7 @@ A server that accepts intent frames over the wire, handles a small set of built-
 
 ## Phase 3: Android shell
 
-A launcher replacement for Android devices with an unlocked bootloader. Wires the resolver and the engine into a real interface: microphone always ready, contact and calendar access, confirmation UI. This is the first phase where a user could actually run Liquid OS as their daily interface, on supported hardware.
+A launcher replacement for Android devices with an unlocked bootloader. Wires the resolver and the engine into a real interface: microphone always ready, contact and calendar access, confirmation UI. This is the first phase where a user could actually run WrkMate OS as their daily interface, on supported hardware.
 
 ## Phase 4: iOS front door app
 
