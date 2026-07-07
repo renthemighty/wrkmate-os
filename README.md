@@ -8,6 +8,8 @@ Liquid OS replaces the wake-word, open-app, fill-in-fields, confirm flow that Si
 
 Heavier requests are handed to the activation engine, a server-side build system that assembles one-off tools on demand. Ask "how big is my yard" and the engine fetches a satellite image, works out scale, outlines the lot, and returns a square footage number. Nobody wrote a yard-measuring app ahead of time. The engine built the tool for that request.
 
+Think of it the way Windows sat on DOS. The existing operating system keeps running underneath and keeps doing the low-level work it is good at. Liquid OS runs on top of it, within each platform's constraints, and becomes the layer you actually live in. It does not pretend to replace what the platform will not let it replace.
+
 ## How it works
 
 Liquid OS is three layers.
